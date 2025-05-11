@@ -50,7 +50,11 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo "mvn spring-boot:run -f SysAlmacen/pom.xml"
+			    timeout(time: 8, unit: 'MINUTES'){
+					// Ejecutar mvn spring-boot:run
+					echo "mvn spring-boot:run -f SysAlmacen/pom.xml"
+                }			
+                //echo "mvn spring-boot:run -f SysAlmacen/pom.xml"
             }
         }
     }
