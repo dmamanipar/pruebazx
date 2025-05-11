@@ -10,14 +10,14 @@ pipeline {
         stage('Clone') {
             steps {
                 timeout(time: 2, unit: 'MINUTES'){
-                    git branch: 'main', credentialsId: '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', url: 'https://github.com/dmamanipar/ProyectosTS2024-C2.git'
+                    git branch: 'main', credentialsId: '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', url: 'https://github.com/dmamanipar/pruebazx.git'
                 }
             }
         }
         stage('Build') {
             steps {
                 timeout(time: 8, unit: 'MINUTES'){
-                    sh "mvn -DskipTests clean package -f SysAsistenciaAn/pom.xml"
+                    sh "mvn -DskipTests clean package -f SysAlmacen/pom.xml"
                 }
             }
         }
@@ -25,7 +25,7 @@ pipeline {
             steps {
                 timeout(time: 8, unit: 'MINUTES'){
                     // Se cambia <test> por <install> para que se genere el reporte de jacoco
-                    sh "mvn clean install -f SysAsistenciaAn/pom.xml"
+                    sh "mvn clean install -f SysAlmacen/pom.xml"
                 }
             }
         }
@@ -33,7 +33,7 @@ pipeline {
             steps {
                 timeout(time: 4, unit: 'MINUTES'){
                     withSonarQubeEnv('sonarqube'){
-                        sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar -Pcoverage -f SysAsistenciaAn/pom.xml"
+                        sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar -Pcoverage -f SysAlmacen/pom.xml"
                     }
                 }
             }
@@ -50,7 +50,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo "mvn spring-boot:run -f SysAsistenciaAn/pom.xml"
+                echo "mvn spring-boot:run -f SysAlmacen/pom.xml"
             }
         }
     }
