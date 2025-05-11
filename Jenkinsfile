@@ -10,7 +10,7 @@ pipeline {
         stage('Clone') {
             steps {
                 timeout(time: 2, unit: 'MINUTES'){
-                    git branch: 'main', credentialsId: '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', url: 'https://github.com/dmamanipar/pruebazx.git'
+                    git branch: 'main', credentialsId: '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', url: 'https://github.com/dmamanipar/pruebazx.git'
                 }
             }
         }
@@ -23,7 +23,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                timeout(time: 8, unit: 'MINUTES'){
+                timeout(time: 10, unit: 'MINUTES'){
                     // Se cambia <test> por <install> para que se genere el reporte de jacoco
                     sh "mvn clean install -f SysAlmacen/pom.xml"
                 }
